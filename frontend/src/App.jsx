@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Signin";
-// import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Dashboard";
 
-// Simple private route component to protect dashboard
+// Private route wrapper
 // const PrivateRoute = ({ children }) => {
-//   const token = localStorage.getItem("token"); // token stored on login
-//   return token ? children : <Navigate to="/login" />;
+//   const token = localStorage.getItem("token"); // check if logged in
+//   return token ? children : <Navigate to="/signin" />;
 // };
 
 function App() {
@@ -16,16 +16,19 @@ function App() {
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Login />} />
-        {/* <Route
-          path="/dashboard"
+        
+        {/* Protected Dashboard Route */}
+        <Route
+          path="/"
           element={
-            <PrivateRoute>
+            // <PrivateRoute>
               <Dashboard />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
-        /> */}
-        {/* Redirect root to login */}
-        {/* <Route path="/" element={<Navigate to="/login" />} /> */}
+        />
+
+        {/* Redirect root to signin */}
+        <Route path="/" element={<Navigate to="/signin" />} />
       </Routes>
     </Router>
   );
